@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61d094339e318db498ea5f52b5cfe7e0, type: 3}
-  m_Name: CycleTents
+  m_Name: PlaceAttraction
   m_EditorClassIdentifier: 
   inputAction:
     m_Name: Input
@@ -20,28 +20,12 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: Scroll Wheel
-      m_Id: 880eeaa5-264f-41d8-a18d-7349e9345906
-      m_Path: 1DAxis
+    - m_Name: 
+      m_Id: 6437c230-5e83-40e1-b014-80594da25fcf
+      m_Path: <Mouse>/leftButton
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Input
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: 12e8e03e-d28a-4a77-9488-385fe79a0c6e
-      m_Path: <Mouse>/scroll/down
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: 6122c368-ee18-4256-b2c3-1cf81e0bb824
-      m_Path: <Mouse>/scroll/up
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input
-      m_Flags: 8
+      m_Flags: 0
     m_Flags: 0

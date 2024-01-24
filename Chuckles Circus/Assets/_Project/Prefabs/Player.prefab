@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 673471868987047914}
   - component: {fileID: 7675310460844138523}
+  - component: {fileID: 8382737345705412831}
   m_Layer: 0
   m_Name: Tent Management
   m_TagString: Untagged
@@ -44,9 +45,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431599377af33964d85ba36f6e64e8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeTentInput: {fileID: 11400000, guid: a0687231dd8ab8e479e5b212b928e7a2, type: 2}
-  destroyTentInput: {fileID: 11400000, guid: ae8ff4742e98c3242b8d9ef1e439c63d, type: 2}
-  cycleTentInput: {fileID: 11400000, guid: a0687231dd8ab8e479e5b212b928e7a2, type: 2}
+  placeAttractionInput: {fileID: 11400000, guid: 6fe2f23a2fc2fe644aa8d3d5e46969b0,
+    type: 2}
+  destroyAttractionInput: {fileID: 11400000, guid: ae8ff4742e98c3242b8d9ef1e439c63d,
+    type: 2}
+  cycleAttractionInput: {fileID: 11400000, guid: a0687231dd8ab8e479e5b212b928e7a2,
+    type: 2}
+--- !u!114 &8382737345705412831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732194102893258471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bbd1437d5a242c49b04cbafcebc189c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attractions:
+  - {fileID: 11400000, guid: 4c9ad7b45fcfdb548b55a25a31d2967f, type: 2}
+  - {fileID: 11400000, guid: 7c0e803639a05e74d9d4d59f4a3120dd, type: 2}
 --- !u!1 &8064786471625227053
 GameObject:
   m_ObjectHideFlags: 0
