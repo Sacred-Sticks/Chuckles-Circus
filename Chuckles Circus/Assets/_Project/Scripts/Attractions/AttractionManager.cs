@@ -46,7 +46,7 @@ public class AttractionManager : MonoBehaviour, IAttractionManager, ICycle<Attra
     {
         hologram.TryGetComponent(out IAttraction attraction);
         attraction.LockedPosition = true;
-
+        attraction.BuildAttraction();
         HologramActive = false;
     }
     #endregion

@@ -62,6 +62,8 @@ MonoBehaviour:
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 8
+  hologramShader: {fileID: -6465566751694194690, guid: 60aa6cc9a00b4dc4e99fa28ebbb315a1,
+    type: 3}
 --- !u!1001 &63719015710018411
 PrefabInstance:
   m_ObjectHideFlags: 0
