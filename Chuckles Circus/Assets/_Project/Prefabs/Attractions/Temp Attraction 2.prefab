@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8145643411616624860}
   - component: {fileID: 4747182220102406328}
   m_Layer: 3
-  m_Name: Temp Attraction
+  m_Name: Temp Attraction 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

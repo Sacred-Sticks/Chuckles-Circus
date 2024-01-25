@@ -1,3 +1,4 @@
+using System;
 using Kickstarter.Inputs;
 using Kickstarter.Observer;
 using UnityEngine;
@@ -9,11 +10,13 @@ public class AttractionController : Observable, IInputReceiver
     [SerializeField] private FloatInput cycleAttractionInput;
 
     private ICycle<AttractionObject> attrationCycle;
+    private IAttractionManager attractionManager;
     
     #region UnityEvents
     private void Awake()
     {
         TryGetComponent(out attrationCycle);
+        TryGetComponent(out attractionManager);
     }
     #endregion
     
@@ -36,14 +39,16 @@ public class AttractionController : Observable, IInputReceiver
     {
         if (input == 0)
             return;
-        Debug.Log("Place Tent");
+        Action inputAction = attractionManager.HologramActive ? attractionManager.BuildAttraction : attractionManager.CreateHologram;
+        inputAction();
     }
 
     private void OnDestroyAttractionInputChange(float input)
     {
         if (input == 0)
             return;
-        Debug.Log("Destroy Tent");
+        if (attractionManager.HologramActive)
+            attractionManager.CancelHologram();
     }
 
     private void OnCycleAttractionInputChange(float input)

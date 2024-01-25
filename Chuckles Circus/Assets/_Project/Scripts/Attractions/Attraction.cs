@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Attraction : MonoBehaviour
+public class Attraction : MonoBehaviour, IAttraction
 {
     [SerializeField] private LayerMask targetLayers;
 
@@ -32,4 +32,9 @@ public class Attraction : MonoBehaviour
 
         return Physics.Raycast(ray, out var hit, float.MaxValue, targetLayers) ? hit.point : Vector3.zero;
     }
+}
+
+public interface IAttraction
+{
+    public bool LockedPosition { set; }
 }

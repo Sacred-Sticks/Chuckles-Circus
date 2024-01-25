@@ -28,25 +28,34 @@ public class AttractionManager : MonoBehaviour, IAttractionManager, ICycle<Attra
     #endregion
     
     #region AttractionManagement
+    public bool HologramActive { get; private set; }
+
     public void CreateHologram()
     {
         hologram = Instantiate(attractions[selectedAttractionIndex].attractionPrefab);
+        HologramActive = true;
     }
 
     public void CancelHologram()
     {
         Destroy(hologram);
+        HologramActive = false;
     }
 
     public void BuildAttraction()
     {
-        // TODO_IMPLEMENT_ME();
+        hologram.TryGetComponent(out IAttraction attraction);
+        attraction.LockedPosition = true;
+
+        HologramActive = false;
     }
     #endregion
 }
 
 public interface IAttractionManager
 {
+    public bool HologramActive { get; }
+    
     public void CreateHologram();
     public void CancelHologram();
     public void BuildAttraction();

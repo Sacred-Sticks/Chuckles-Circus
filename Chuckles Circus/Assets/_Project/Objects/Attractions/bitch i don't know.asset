@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e849c831d904954b7ec0bab9ad9deaa, type: 3}
   m_Name: bitch i don't know
   m_EditorClassIdentifier: 
+  <attractionPrefab>k__BackingField: {fileID: 5382958998369756920, guid: 7092fe45b72dc854b903fb7efb5d603c,
+    type: 3}
+  <attractionShader>k__BackingField: {fileID: 0}
+  <hologramShader>k__BackingField: {fileID: 0}
+  <costToBuild>k__BackingField: 0
