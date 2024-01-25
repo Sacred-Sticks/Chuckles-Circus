@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Attraction : MonoBehaviour, IAttraction
 {
-    [SerializeField] private LayerMask targetLayers;
+    [SerializeField] private LayerMask ignoreLayers;
 
     public bool LockedPosition { private get; set; }
     
@@ -30,7 +30,7 @@ public class Attraction : MonoBehaviour, IAttraction
         var mousePosition = Mouse.current.position.ReadValue();
         var ray = Camera.main.ScreenPointToRay(mousePosition);
 
-        return Physics.Raycast(ray, out var hit, float.MaxValue, targetLayers) ? hit.point : Vector3.zero;
+        return Physics.Raycast(ray, out var hit, float.MaxValue, ~ignoreLayers) ? hit.point : Vector3.zero;
     }
 }
 
