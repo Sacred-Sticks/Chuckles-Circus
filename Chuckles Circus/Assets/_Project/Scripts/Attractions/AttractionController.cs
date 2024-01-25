@@ -8,7 +8,7 @@ public class AttractionController : Observable, IInputReceiver
     [SerializeField] private FloatInput destroyAttractionInput;
     [SerializeField] private FloatInput cycleAttractionInput;
 
-    private ICycle<Attraction> attrationCycle;
+    private ICycle<AttractionObject> attrationCycle;
     
     #region UnityEvents
     private void Awake()
