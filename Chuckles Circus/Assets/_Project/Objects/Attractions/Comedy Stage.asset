@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e849c831d904954b7ec0bab9ad9deaa, type: 3}
-  m_Name: Infinite Mirrors
+  m_Name: Comedy Stage
   m_EditorClassIdentifier: 
-  <AttractionPrefab>k__BackingField: {fileID: 3779463195566645294, guid: 142e3a894343422439a72fa264bf14f8,
+  <AttractionPrefab>k__BackingField: {fileID: 5665707459266861736, guid: 18253b51d03222a479c43271edb26aab,
     type: 3}
   <CostToBuild>k__BackingField: 0

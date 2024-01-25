@@ -32,7 +32,7 @@ public class AttractionManager : MonoBehaviour, IAttractionManager, ICycle<Attra
 
     public void CreateHologram()
     {
-        hologram = Instantiate(attractions[selectedAttractionIndex].attractionPrefab);
+        hologram = Instantiate(attractions[selectedAttractionIndex].AttractionPrefab);
         HologramActive = true;
     }
 
