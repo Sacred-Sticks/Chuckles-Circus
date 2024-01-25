@@ -77,6 +77,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9143424379448744237}
   - component: {fileID: 8831185472394635128}
+  - component: {fileID: 2468908190844052053}
   m_Layer: 0
   m_Name: Camera Controller
   m_TagString: Untagged
@@ -93,7 +94,7 @@ Transform:
   m_GameObject: {fileID: 4464140454054181400}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -112,7 +113,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementInput: {fileID: 11400000, guid: 27092afacc3e02f40b2785ecaf5a6a1e, type: 2}
-  movementSpeed: 3
+  <Speed>k__BackingField: 5
+--- !u!114 &2468908190844052053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4464140454054181400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdfafd734589447e842be2aa466159a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraZoomInput: {fileID: 11400000, guid: 04bc1fe3cee43be4aa6312823358bb0a, type: 2}
+  maxZoomRange: {x: -1, y: 2}
 --- !u!1 &8064786471625227053
 GameObject:
   m_ObjectHideFlags: 0

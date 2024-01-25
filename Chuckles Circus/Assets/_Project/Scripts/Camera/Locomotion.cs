@@ -1,10 +1,10 @@
 using Kickstarter.Inputs;
 using UnityEngine;
 
-public class Locomotion : MonoBehaviour, IInputReceiver
+public class Locomotion : MonoBehaviour, IInputReceiver, ILocomotion
 {
     [SerializeField] private Vector2Input movementInput;
-    [SerializeField] private float movementSpeed;
+    [field: SerializeField] public float Speed { get; set; }
     
     private Rigidbody body;
     private Vector3 rawInput;
@@ -18,7 +18,7 @@ public class Locomotion : MonoBehaviour, IInputReceiver
 
     private void FixedUpdate()
     {
-        body.velocity = rawInput * movementSpeed;
+        body.velocity = rawInput * Speed;
     }
     #endregion
     
@@ -38,4 +38,9 @@ public class Locomotion : MonoBehaviour, IInputReceiver
         rawInput = new Vector3(input.x, 0, input.y);
     }
     #endregion
+}
+
+public interface ILocomotion
+{
+    public float Speed { get; set; }
 }
