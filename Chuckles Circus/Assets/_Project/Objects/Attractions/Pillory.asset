@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e849c831d904954b7ec0bab9ad9deaa, type: 3}
-  m_Name: fuck off prick
+  m_Name: Pillory
   m_EditorClassIdentifier: 
-  <attractionPrefab>k__BackingField: {fileID: 5382958998369756920, guid: 4676be3c5c4eed049825857b9f3d903b,
+  <attractionPrefab>k__BackingField: {fileID: 4698916097613154922, guid: 11478697f6f47434cbd11759238b5607,
     type: 3}
   <attractionShader>k__BackingField: {fileID: 0}
   <hologramShader>k__BackingField: {fileID: 0}
