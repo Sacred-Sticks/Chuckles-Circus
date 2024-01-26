@@ -114,20 +114,22 @@ public class Patron : MonoBehaviour
         switch(state)
         {
             case (PatronState.EnteringPark):
-                // after spawning they are in this state.
-
-                if (navAgent.destination != enter.position)
+                Debug.Log("[Patron " + _ID + "] Remaining dist to enterance = " + navAgent.remainingDistance);
+                if (!navAgent.pathPending) // Check if the path is finished calculating
                 {
-                    navAgent.SetDestination(enter.position);
-                    Debug.Log("[Patron " + _ID + "] Set nav destination to enterance.");
-                }
+                    if (navAgent.remainingDistance <= 0.1f && !navAgent.pathPending) // Check if the agent is close enough to the entrance
+                    {
+                        state = PatronState.Idle;
+                    }
+                    else if (navAgent.pathPending) // Set the destination if it's not already set
+                    {
+                        navAgent.SetDestination(enter.position);
+                        Debug.Log("[Patron " + _ID + "] Set nav destination to entrance.");
+                    }
 
-                if (navAgent.pathStatus == NavMeshPathStatus.PathComplete)
-                {
-                    state = PatronState.Idle; break;
                 }
-
                 break;
+
             case (PatronState.Idle):
                 // if there are no attractions or if the patron is on cooldown
                 Vector3 origin = gameObject.transform.position;
@@ -206,6 +208,7 @@ public class Patron : MonoBehaviour
         {
             state = PatronState.LeavingPark;
             StartLeaveRoutine(); // do it pussy
+            return;
         }
 
         DecideAIState(); // do this affter the depression calculation because it will be dependant

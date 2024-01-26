@@ -135,7 +135,10 @@ public class PatronManager : MonoBehaviour
     public void GameTick()
     {
         // deploy patrons based on deploy rate
-        int roll = Random.Range(0, 100);
+        int roll = -1;
+        if (PopulationUnderMax())
+            roll = Random.Range(0, 100);
+
         //Debug.Log("[Patron Manager] Rolled for deploy" + roll);
         if (roll >= deployRate)
         {
