@@ -113,7 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementInput: {fileID: 11400000, guid: 27092afacc3e02f40b2785ecaf5a6a1e, type: 2}
-  <Speed>k__BackingField: 5
+  <Speed>k__BackingField: 10
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 25, y: 0, z: 25}
 --- !u!114 &2468908190844052053
 MonoBehaviour:
   m_ObjectHideFlags: 0
