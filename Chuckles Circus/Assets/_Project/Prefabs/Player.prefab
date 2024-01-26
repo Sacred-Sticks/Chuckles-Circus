@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 673471868987047914}
   - component: {fileID: 7675310460844138523}
   - component: {fileID: 8382737345705412831}
+  - component: {fileID: 4773322948451763884}
   m_Layer: 0
   m_Name: Attraction Management
   m_TagString: Untagged
@@ -70,6 +71,23 @@ MonoBehaviour:
   attractionLayer:
     serializedVersion: 2
     m_Bits: 8
+  blueHologramShader: {fileID: -6465566751694194690, guid: 60aa6cc9a00b4dc4e99fa28ebbb315a1,
+    type: 3}
+  redHologramShader: {fileID: -6465566751694194690, guid: 275865571ea5f7e4f812ab1a5df0df9b,
+    type: 3}
+--- !u!114 &4773322948451763884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732194102893258471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b072d3a6fde454ba0d1d4e0e28e60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitialCurrency: 50
 --- !u!1 &4464140454054181400
 GameObject:
   m_ObjectHideFlags: 0

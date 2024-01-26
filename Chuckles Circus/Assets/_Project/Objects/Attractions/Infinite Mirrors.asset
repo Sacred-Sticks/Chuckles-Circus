@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AttractionPrefab>k__BackingField: {fileID: 3779463195566645294, guid: 142e3a894343422439a72fa264bf14f8,
     type: 3}
-  <CostToBuild>k__BackingField: 0
+  <CostToBuild>k__BackingField: 25

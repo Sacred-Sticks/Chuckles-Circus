@@ -5,9 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Attraction : MonoBehaviour, IAttraction
 {
-    [SerializeField] private LayerMask ignoreLayers;
-    [SerializeField] private Shader hologramShader;
-
+    public LayerMask IgnoreLayers { private get; set; }
+    
     public bool LockedPosition { private get; set; }
 
     private MeshRenderer[] renderers;
@@ -21,7 +20,6 @@ public class Attraction : MonoBehaviour, IAttraction
 
     private IEnumerator Start()
     {
-        SetToHologram();
         var endOfFrame = new WaitForEndOfFrame();
         while (!LockedPosition)
         {
@@ -34,11 +32,10 @@ public class Attraction : MonoBehaviour, IAttraction
     #region Attractions
     public void BuildAttraction()
     {
-        ResetMaterials();
+        ResetShaders();
     }
-    #endregion
 
-    private void SetToHologram()
+    public void SetToHologram(Shader hologramShader)
     {
         foreach (var meshRenderer in renderers)
         {
@@ -51,7 +48,7 @@ public class Attraction : MonoBehaviour, IAttraction
         }
     }
 
-    private void ResetMaterials()
+    public void ResetShaders()
     {
         foreach (var meshRenderer in renderers)
         {
@@ -61,6 +58,7 @@ public class Attraction : MonoBehaviour, IAttraction
             }
         }
     }
+    #endregion
 
     private void MoveToCursor()
     {
@@ -72,13 +70,16 @@ public class Attraction : MonoBehaviour, IAttraction
         var mousePosition = Mouse.current.position.ReadValue();
         var ray = Camera.main.ScreenPointToRay(mousePosition);
 
-        return Physics.Raycast(ray, out var hit, float.MaxValue, ~ignoreLayers) ? hit.point : Vector3.zero;
+        return Physics.Raycast(ray, out var hit, float.MaxValue, ~IgnoreLayers) ? hit.point : Vector3.zero;
     }
 }
 
 public interface IAttraction
 {
     public bool LockedPosition { set; }
+    public LayerMask IgnoreLayers { set; }
 
     public void BuildAttraction();
+    public void SetToHologram(Shader hologramShader);
+    public void ResetShaders();
 }

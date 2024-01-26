@@ -4,5 +4,5 @@
 public class AttractionObject : ScriptableObject
 {
     [field: SerializeField] public GameObject AttractionPrefab { get; private set; }
-    [field: SerializeField] public float CostToBuild { get; private set; }
+    [field: SerializeField] public int CostToBuild { get; private set; }
 }

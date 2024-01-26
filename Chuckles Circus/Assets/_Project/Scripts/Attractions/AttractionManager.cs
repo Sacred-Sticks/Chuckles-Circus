@@ -1,15 +1,24 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class AttractionManager : MonoBehaviour, IAttractionManager, ICycle<AttractionObject>
 {
     [SerializeField] private AttractionObject[] attractions;
     [SerializeField] private LayerMask attractionLayer;
+    [SerializeField] private Shader blueHologramShader;
+    [SerializeField] private Shader redHologramShader;
 
     private int selectedAttractionIndex;
 
-    private GameObject hologram;
+    private GameObject attractionGO;
+    private IWallet wallet;
+    
+    #region UnityEvents
+    private void Awake()
+    {
+        TryGetComponent(out wallet);
+    }
+    #endregion
     
     #region TentCycle
     public AttractionObject Increment()
@@ -35,22 +44,31 @@ public class AttractionManager : MonoBehaviour, IAttractionManager, ICycle<Attra
 
     public void CreateHologram()
     {
-        hologram = Instantiate(attractions[selectedAttractionIndex].AttractionPrefab);
+        attractionGO = Instantiate(attractions[selectedAttractionIndex].AttractionPrefab);
+        attractionGO.TryGetComponent(out IAttraction attraction);
+        var shader = blueHologramShader;
+        if (wallet.Currency < attractions[selectedAttractionIndex].CostToBuild)
+            shader = redHologramShader;
+        attraction.SetToHologram(shader);
+        attraction.IgnoreLayers = attractionLayer;
         HologramActive = true;
     }
 
     public void CancelHologram()
     {
-        Destroy(hologram);
+        Destroy(attractionGO);
         HologramActive = false;
     }
 
     public void BuildAttraction()
     {
-        hologram.TryGetComponent(out IAttraction attraction);
+        if (wallet.Currency < attractions[selectedAttractionIndex].CostToBuild)
+            return;
+        attractionGO.TryGetComponent(out IAttraction attraction);
         attraction.LockedPosition = true;
         attraction.BuildAttraction();
         HologramActive = false;
+        wallet.Spend(attractions[selectedAttractionIndex].CostToBuild);
     }
 
     public void DestroyAttraction()
