@@ -12,6 +12,7 @@ public class AttractionManager : MonoBehaviour, IAttractionManager, ICycle<Attra
 
     private GameObject attractionGO;
     private IWallet wallet;
+    private IGameplayInterface gameplayUI;
     
     #region UnityEvents
     private void Awake()

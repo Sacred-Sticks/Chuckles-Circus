@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/Styles.uss?fileID=7433441132597879392&amp;guid=b0b4057ce4138834b90796dce3923c07&amp;type=3#Styles" />
+    <ui:VisualElement name="Top" style="flex-grow: 1;" />
+    <ui:VisualElement name="Middle" style="flex-grow: 1;" />
+    <ui:VisualElement name="Bottom" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="Left" style="flex-direction: column-reverse; flex-grow: 1;">
+            <ui:Label tabindex="-1" text="Currency: 0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Currency" class="text_label" style="-unity-text-align: lower-left; flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Center" style="flex-grow: 1;" />
+        <ui:VisualElement name="Right" style="flex-direction: column-reverse; flex-wrap: wrap; flex-grow: 1;">
+            <ui:Label tabindex="-1" text="Patrons: 0" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text_label" style="-unity-text-align: lower-right; flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
