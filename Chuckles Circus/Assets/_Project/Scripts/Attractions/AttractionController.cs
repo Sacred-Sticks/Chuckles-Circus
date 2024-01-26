@@ -48,7 +48,11 @@ public class AttractionController : Observable, IInputReceiver
         if (input == 0)
             return;
         if (attractionManager.HologramActive)
+        {
             attractionManager.CancelHologram();
+            return;
+        }
+        attractionManager.DestroyAttraction();
     }
 
     private void OnCycleAttractionInputChange(float input)

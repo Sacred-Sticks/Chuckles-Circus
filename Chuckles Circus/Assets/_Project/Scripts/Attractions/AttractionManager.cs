@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AttractionManager : MonoBehaviour, IAttractionManager, ICycle<AttractionObject>
 {
     [SerializeField] private AttractionObject[] attractions;
+    [SerializeField] private LayerMask attractionLayer;
 
     private int selectedAttractionIndex;
 
@@ -49,7 +52,22 @@ public class AttractionManager : MonoBehaviour, IAttractionManager, ICycle<Attra
         attraction.BuildAttraction();
         HologramActive = false;
     }
+
+    public void DestroyAttraction()
+    {
+        var target = GetCursorHit();
+        if (target != null)
+            Destroy(target.transform.root.gameObject);
+    }
     #endregion
+    
+    private GameObject GetCursorHit()
+    {
+        var mousePosition = Mouse.current.position.ReadValue();
+        var ray = Camera.main.ScreenPointToRay(mousePosition);
+
+        return Physics.Raycast(ray, out var hit, float.MaxValue, attractionLayer) ? hit.transform.gameObject : null;
+    }
 }
 
 public interface IAttractionManager
@@ -59,4 +77,5 @@ public interface IAttractionManager
     public void CreateHologram();
     public void CancelHologram();
     public void BuildAttraction();
+    public void DestroyAttraction();
 }

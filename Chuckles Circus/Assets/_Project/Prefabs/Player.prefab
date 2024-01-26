@@ -67,6 +67,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c9ad7b45fcfdb548b55a25a31d2967f, type: 2}
   - {fileID: 11400000, guid: 7c0e803639a05e74d9d4d59f4a3120dd, type: 2}
   - {fileID: 11400000, guid: 4cf38cbb225534c4a85d666fb3ba6f8e, type: 2}
+  attractionLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &4464140454054181400
 GameObject:
   m_ObjectHideFlags: 0
