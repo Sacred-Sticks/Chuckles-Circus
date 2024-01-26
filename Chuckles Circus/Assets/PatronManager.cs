@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,9 +12,11 @@ public class PatronManager : MonoBehaviour
     int maxPatrons;
     int deployRate;
 
-
+    [SerializeField] PlayerHUD playerHUD;
     [SerializeField] GameObject patronprefab;
     [SerializeField] Transform[] patronSpawns;
+    [SerializeField] public Transform[] exits;
+    [SerializeField] public Transform enterance;
     [SerializeField] int defaultMaxPatrons;
     [SerializeField,
         Tooltip("Each tick, a 0-100 roll must be >= this value to spawn a patron.")] int defaultDeployRate;
@@ -42,7 +45,7 @@ public class PatronManager : MonoBehaviour
         }
         else
             maxPatrons = defaultMaxPatrons;
-
+        UpdatePlayerUI();
         StartGame();
     }
 
@@ -83,21 +86,41 @@ public class PatronManager : MonoBehaviour
         }
     }
 
+    void UpdatePlayerUI()
+    {
+        playerHUD.popIndicator.text = "Population: " + patrons.Count + "/" + maxPatrons;
+    }
+
     public int RegisterPatron(Patron patron)
     {
-        int patronID = cumCounter++;
+        int patronID = cumCounter++; // its CUMULATIVE
 
         if (!patrons.ContainsKey(patronID))
         {
             patrons.Add(patronID, patron);
             Debug.Log("Added new patron to dict.");
+            UpdatePlayerUI();
             return patronID;
         }
 
-        Debug.Log("Dict already contains patron with same ID");
+        Debug.Log("Dict already contains patron with same ID.. somehow... ???");
         return -1;
     }
 
+    public void UnregisterPatron(int id)
+    {
+        try
+        {
+            if (patrons.ContainsKey(id))
+                patrons.Remove(id);
+                Debug.Log("[PatronManager] Patron " +  id + " un-registered");
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("[PatronManager] Something went wrorng with removing the patron.");
+            Debug.LogError(e);
+        }
+    }
     public void RegisterAttraction(Attraction built)
     {
 
@@ -113,7 +136,7 @@ public class PatronManager : MonoBehaviour
     {
         // deploy patrons based on deploy rate
         int roll = Random.Range(0, 100);
-        Debug.Log("[Patron Manager] Rolled for deploy" + roll);
+        //Debug.Log("[Patron Manager] Rolled for deploy" + roll);
         if (roll >= deployRate)
         {
             if (patrons.Count < maxPatrons)

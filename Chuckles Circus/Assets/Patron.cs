@@ -5,6 +5,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum PatronState
+{
+    Idle = 0,
+    MoveToAttraction = 1,
+    EnteringPark = 2,
+    LeavingPark = 3
+}
+
 public class Patron : MonoBehaviour
 {
     // Patrons will have a max potential money (bank), depression stat
@@ -21,17 +29,22 @@ public class Patron : MonoBehaviour
 
     [Header("---Spawn Parameters---")]
     [SerializeField] int depressFloor;
+    [SerializeField, Tooltip("Tolerance decreased cured depression from attractions" +
+        " and increases the chance for the patron to leave before fully depressed or broke." +
+        "Tolerance 1 mitigates cure by 1 and increases chance to leave by 10%. As a trade-off, their bank increases by 50% each point.")] 
+                     int tolerance;
     [SerializeField] int depressCeiling;
     [SerializeField] int startCashFloor;
     [SerializeField] int startCashCeiling;
     [SerializeField] int drate; // adds 1 depression every drate game ticks.
     [SerializeField,
     Tooltip("Maximum depression value allowed")]
-    int defaultDepressionMax;
+                    int defaultDepressionMax;
     [Header("--- DEBUG VALS ---")]
     [SerializeField] int _ID;
     [SerializeField] int bank;
     [SerializeField] int depression;
+    [SerializeField] PatronState state;
 
     // NON-INSPECTOR SHIT
     PatronManager patronManager;
@@ -39,7 +52,8 @@ public class Patron : MonoBehaviour
     int dc = 0;// depression counter
     int depressionMax;
     bool leaving;
-    Transform leavePoint;
+    Transform exit;
+    Transform enter;
 
     void Start()
     {
@@ -47,7 +61,8 @@ public class Patron : MonoBehaviour
         //Register the patron
         _ID = patronManager.RegisterPatron(this);
         leaving = false;
-        leavePoint = GameObject.Find("LeavePoint").transform;
+        exit = patronManager.exits[0];
+        enter = patronManager.enterance;
         navAgent = gameObject.GetComponent<NavMeshAgent>();
         // set stats
         
@@ -62,6 +77,8 @@ public class Patron : MonoBehaviour
         else
             depressionMax = defaultDepressionMax;
 
+
+        state = PatronState.EnteringPark;
         InvokeRepeating("GameTick", 1f, 1f);
 
     }
@@ -87,20 +104,67 @@ public class Patron : MonoBehaviour
         // else if they arent giving the remains of their money or paying in full, they shouldnt be in this method
         return -1;
     }
-    void DecideWhereToGo()
+    void DecideAIState()
     {
         // based on money and depression decide where to go.
         // Possibilities: Visit attraction, loiter, leave
         // Depression 20 = leave, depression > 15 = start rolling to add more depression
 
+        // simple finite state machine based off the enum. This re-executes every tick.
+        switch(state)
+        {
+            case (PatronState.EnteringPark):
+                // after spawning they are in this state.
 
+                if (navAgent.destination != enter.position)
+                {
+                    navAgent.SetDestination(enter.position);
+                    Debug.Log("[Patron " + _ID + "] Set nav destination to enterance.");
+                }
+
+                if (navAgent.pathStatus == NavMeshPathStatus.PathComplete)
+                {
+                    state = PatronState.Idle; break;
+                }
+
+                break;
+            case (PatronState.Idle):
+                // if there are no attractions or if the patron is on cooldown
+                Vector3 origin = gameObject.transform.position;
+                float dist = 10; // maximum wander 10
+                int layermask = -1; //all layers
+
+                Vector3 randomDir = UnityEngine.Random.insideUnitSphere * dist;
+                randomDir += origin;
+
+                NavMeshHit navHit;
+
+                NavMesh.SamplePosition(randomDir, out navHit, dist, layermask);
+
+                navAgent.SetDestination(navHit.position);
+                break;
+
+        }
 
 
     }
     void StartLeaveRoutine()
     {
+
         Debug.Log("[Patron " + _ID + "] Is leaving.");
-        navAgent.SetDestination(leavePoint.position);
+        navAgent.SetDestination(exit.position);
+        // relies on the patron to enter a trigger box with the tag exit to die
+        
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.CompareTag("exit"))
+        {
+            patronManager.UnregisterPatron(_ID);
+            Destroy(gameObject);
+        }
     }
 
     void AddDepression()
@@ -138,13 +202,15 @@ public class Patron : MonoBehaviour
         }
 
         // decide whether or not to KYS after getting +1 depression
-        if (depression == depressionMax)
+        if (depression == depressionMax && state != PatronState.LeavingPark)
         {
-            leaving = true;
+            state = PatronState.LeavingPark;
             StartLeaveRoutine(); // do it pussy
         }
 
+        DecideAIState(); // do this affter the depression calculation because it will be dependant
 
+        // wait till all actions are done this tick to display new bank
         cashText.text = "$"+bank.ToString();
 
     }
